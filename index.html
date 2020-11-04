@@ -1,0 +1,79 @@
+<!-- <html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/hanoi.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./dist/main.js"></script>
+</head>
+
+<body>
+    <h1>Hanoi</h1>
+    <figure class="hanoi"></figure>
+
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue:regular" rel="stylesheet" />
+    <script type="text/javascript" src="./dist/main.js"></script>
+    <script>
+        const getOutboundLink = (action, label) => {
+            gtag('event', 'click', {
+                'event_category': 'click',
+                'event_action': action,
+                'event_label': label,
+                'transport_type': 'beacon',
+            });
+        }
+    </script>
+    <title>Virtual Putt</title>
+    <!-- <link rel="icon" type="image/png" href="./assets/favicon.ico"> -->
+</head>
+
+<body>
+    
+    <header>
+        <div class="sheep-image"></div>
+        <h1>Virtual Putt</h1>
+        <div class="sheepdog-image"></div>
+    </header>
+    <main>
+        <div class="game-view-container">
+            <canvas id="game-canvas"></canvas>
+            <div class="game-menu" id="start-menu">
+                <div class="menu-content">
+                    <!-- <h2 class="menu-title" data-round="1">Help!</h2> -->
+                    <p class="menu-text">Welcome to Virtual Putt</p>
+                    <button class="start-button"
+                        onclick="getOutboundLink('playGame', `${document.querySelector('.menu-title').dataset.round}`);">Start</button>
+                    <p>High Scores</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="author">
+            <a href="https://github.com/jackyli97">
+                <img id="logo-link" src="./assets/images/githublogo.png">
+            </a>
+            <a href="https://www.linkedin.com/in/xlihuang/">
+                <img id="logo-link" src="./assets/images/linkedInLogo.png">
+            </a>
+        </div>
+        <!-- <div id="music-footer">
+            <p>Music created using:</p>
+            <a href="http://www.beepbox.co/#">BeepBox</a>
+        </div> -->
+    </footer>
+</body>
+
+</html>
