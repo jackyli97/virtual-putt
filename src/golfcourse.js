@@ -17,18 +17,32 @@ class GolfCourse {
 
         this.ctx = ctx;
         this.canvas = document.getElementById("game-canvas");
-        this.vel = [0, 0];
+        this.vel = {x: 0, y:0};
         this.initialLoad = true;
         this.clicked = false;
+        this.ballisMoving = false;
         this.gameCanvas = document.getElementById("game-canvas")
         this.range = {xmin: 300, ymin: 400, xmax: 380, ymax: 440}
         this.pos = [(this.range.xmin + this.range.xmax)/2, (this.range.ymin + this.range.ymax)/2];
-        this.clubPos = [this.pos[0], this.pos[1]]
+        this.clubPos = [this.pos[0], this.pos[1]];
+        this.trajPos = [this.pos[0], this.pos[1]];
+        let a = (this.pos[0] - this.clubPos[0]);
+        let b = (this.pos[1] - this.clubPos[1]);
+        this.c = Math.sqrt(a * a + b * b);
+        let angle = Math.atan2(b, a)
+        this.traj = {x:Math.cos(angle) * this.c, y:Math.sin(angle) * this.c}
+        // var a = (this.clubPos[0] - this.pos[0]);
+        // var b = (this.clubPos[1] - this.pos[1]);
+        // this.trajDist = Math.sqrt(a * a + b * b);
+        // this.xDist = (this.pos[0] - this.clubPos[0])
+        // this.yDist = (this.pos[1] - this.clubPos[1])
         this.img1 = img1;
         this.img2 = img2;
     }
-
-    update() {
+    
+    move() {
+        this.pos[0] += 2 * this.traj.x;
+        this.pos[1] += 2 * this.traj.y;
         // this.frameRate = 5;
         
         // if (!this.rightKey && !this.leftKey) this.vel[0] = 0;
@@ -105,18 +119,33 @@ class GolfCourse {
         this.ctx.drawImage(
         this.img1,
         this.pos[0], this.pos[1],
-        
         ) 
-        if (this.clicked) {
-        // this.ctx.save();
-        // this.ctx.translate(this.position.x, this.position.y)
-        // this.ctx.restore()
-        this.ctx.drawImage(
-            this.img2,
-            this.clubPos[0], this.clubPos[1],
+        if (this.clicked && !this.ballisMoving) {
+            // this.ctx.save();
+            // this.ctx.translate(this.position.x, this.position.y)
+            // this.ctx.restore()
+            this.ctx.drawImage(
+                this.img2,
+                this.clubPos[0], this.clubPos[1],
             )
+            
+                        // this.ctx.beginPath();
+                        // this.ctx.moveTo(this.trajPos[0], this.trajPos[1]);
+                        // this.ctx.lineTo(this.trajPos[0] + (this.trajDist * xoperand), this.trajPos[1] + (this.trajDist * yoperand));
+                        // this.ctx.strokeStyle = "rgb(255, 59, 206)";
+                        // this.ctx.lineWidth = 3;
+                        // this.ctx.stroke();
+            // let xoperand = (this.pos[0] - this.clubPos[0]) > 0 ? 1 : (this.pos[0] === this.clubPos[0]) ? 0 : -1;
+            // let yoperand = (this.pos[1] - this.clubPos[1]) > 0 ? 1 : (this.pos[1] === this.clubPos[1]) ? 0 : -1;
+
+            for (let i=0; i<6; i++) {
+                this.ctx.beginPath()
+                this.ctx.arc((this.pos[0]+2)+(i*((this.traj.x)/6)), (this.pos[1]+1.5)+(i*((this.traj.y)/6)), 2, 0, Math.PI * 2, false)
+                this.ctx.fillStyle = "rgb(226, 255, 59)"
+                this.ctx.fill()
+                this.ctx.closePath()
+            }
         }
-        
     }
 
     // drawFrame(frameX, frameY, canvasX, canvasY) {
@@ -146,15 +175,16 @@ class GolfCourse {
         if (this.initialLoad) {
             this.initialLoad = false;
         }
-        else {
+        else if (!this.clicked) {
             this.clicked = true;
             this.gameCanvas.classList.toggle('place-ball');
             this.gameCanvas.classList.toggle('ball-placed');
+            console.log('clicked');
         }
-        console.log('clicked');
     }
 
     mouseMoveHandler(e) {
+        
         let loc = this.windowToCanvas(this.canvas, e.clientX, e.clientY);
 
         if (this.clicked) {
@@ -169,8 +199,19 @@ class GolfCourse {
                 this.pos[1] = loc.y
             }
         }
-        this.clubPos[0] = loc.x
-        this.clubPos[1] = loc.y
+
+        this.clubPos[0] = loc.x;
+        this.clubPos[1] = loc.y;
+
+        let a = (this.pos[0] - loc.x);
+        let b = (this.pos[1] - loc.y);
+        this.c = Math.sqrt(a * a + b * b);
+        let angle = Math.atan2(b, a)
+        // debugger
+        this.traj = {
+            x: Math.cos(angle) * this.c,
+            y: Math.sin(angle) * this.c
+        }
     }
     // keyDownHandler(e) {
     //     if (e.keyCode === 39) {

@@ -17,9 +17,10 @@ class Game {
         this.goats = [];
         this.stationaryObjects = [];
         this.ctx = ctx;
-        // this.addFences();
+        this.ballStatus = 0;
         this.addTimer();
         this.addGolfCourse();
+        this.roundOver = false;
     }
 
     
@@ -38,10 +39,24 @@ class Game {
         this.stationaryObjects.push(this.timer);
         this.timer.countdown();
     }
+
+    shotHandler(e) {
+        if ((this.ballStatus < 1) && this.golfcourse.clicked) {
+            this.ballStatus += 1;
+        }
+        else if (this.ballStatus >= 1 && this.golfcourse.clicked) {
+            this.golfcourse.ballisMoving = true;
+            this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+            this.moveBall();
+            console.log('itworked');
+        }
+    }
     
-    // moveBall() {
-    //     this.golfcourse.move();
-    // }
+    moveBall() {
+        this.golfcourse.move();
+        setTimeout(()=>{this.golfcourse.ballisMoving = false}, 1000)
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         // this.ctx.fillStyle = "rgb(126, 200, 80)";

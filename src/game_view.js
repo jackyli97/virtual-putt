@@ -19,6 +19,7 @@ class GameView {
         this.menuTitle.dataset.hole = this.hole;
         this.inProgress = true;
         this.bindGameHandlers();
+        this.game.draw(this.ctx);
         this.gameLoop();
     }
 
@@ -80,7 +81,7 @@ class GameView {
         const golfcourse = this.game.golfcourse;
         const mouseMoveHandler = golfcourse.mouseMoveHandler.bind(golfcourse);
         const mouseClickHandler = golfcourse.mouseClickHandler.bind(golfcourse);
-
+        const shotHandler = this.game.shotHandler.bind(this.game)
         // document.addEventListener('mousemove', event => {
         //     mouse.x = event.clientX
         //     mouse.y = event.clientY
@@ -89,6 +90,7 @@ class GameView {
         //     console.log('clicked');
         // });
         document.addEventListener('click', mouseClickHandler);
+        document.addEventListener('click', shotHandler);
         document.addEventListener('mousemove', mouseMoveHandler);
     }
 }
