@@ -41,6 +41,15 @@ header h1 {
     margin-left: -452px;
     border: 2px solid white;
     border-radius: 8px;
+    background-image:url('../images/grass.png');
+}
+
+.place-ball:hover {
+  cursor: move;
+}
+
+.ball-placed:hover {
+  cursor:se-resize
 }
 
 .game-menu {
@@ -63,10 +72,10 @@ header h1 {
     box-sizing: content-box;
 }
 
-.menu-content {
+/* .menu-content {
   padding-left: 300px;
   padding-top: 5px;
-}
+} */
 
 .game-menu.hide {
     opacity: 0;
@@ -81,8 +90,8 @@ header h1 {
     align-items: center;
     height: 300px;
     width: 700px;
-    margin-top: 50px;
-    padding-left: 300px;
+    margin-top: 10px;
+    padding-left: 470px;
     /* padding-top: 5px; */
 }
 

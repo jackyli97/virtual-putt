@@ -4,7 +4,7 @@ import levels from './levels';
 class GameView {
     constructor(ctx) {
         this.ctx = ctx;
-        this.round = 1;
+        this.hole = 1;
         this.gameMenu = document.getElementById('start-menu');
         this.startButton = document.querySelector('.start-button');
         this.menuTitle = document.querySelector('.menu-title');
@@ -15,19 +15,16 @@ class GameView {
     }
 
     start() {
-        this.game = new Game(this.ctx, levels[this.round]);
-        this.menuTitle.dataset.round = this.round;
+        this.game = new Game(this.ctx, levels[this.hole]);
+        this.menuTitle.dataset.hole = this.hole;
         this.inProgress = true;
         this.bindGameHandlers();
         this.gameLoop();
     }
 
     gameLoop() {
-        this.game.moveObjects();
-        this.game.checkCollision();
         this.game.draw(this.ctx);
-
-        if (this.roundOver()) {
+        if (this.holeOver()) {
             this.gameMenu.classList.toggle('hide');
             this.inProgress = false;
         } else {
@@ -35,29 +32,29 @@ class GameView {
         }
     }
 
-    roundOver() {
-        if (this.game.won()) {
+    holeOver() {
+        if (1 + 1 === 3) {
             window.cancelAnimationFrame(this.animationRequestId);
-            this.round += 1;
+            this.hole += 1;
 
-            this.menuTitle.innerHTML = levels[this.round].menuTitle;
-            this.menuText.innerHTML = levels[this.round].menuText;
+            this.menuTitle.innerHTML = levels[this.hole].menuTitle;
+            this.menuText.innerHTML = levels[this.hole].menuText;
 
-            if (this.round < 5) {
+            if (this.hole < 5) {
                 this.startButton.innerHTML = 'Start';
             } else {
                 this.startButton.innerHTML = 'Play Again';
-                this.round = 1;
+                this.hole = 1;
             }
 
             return true;
-        } else if (this.game.lost()) {
+        } else if (1 + 1 === 4) {
             window.cancelAnimationFrame(this.animationRequestId);
             this.menuTitle.innerHTML = 'Not Quite!';
             this.menuText.innerHTML = 'Better luck next time! Give it another shot and hone those herding skills.'
             this.startButton.innerHTML = 'Play Again';
 
-            this.round = 1;
+            this.hole = 1;
             return true;
         }
 
@@ -80,12 +77,19 @@ class GameView {
     }
 
     bindGameHandlers() {
-        const sheepDog = this.game.sheepDog;
-        const keyDownHandler = sheepDog.keyDownHandler.bind(sheepDog);
-        const keyUpHandler = sheepDog.keyUpHandler.bind(sheepDog);
+        const golfcourse = this.game.golfcourse;
+        const mouseMoveHandler = golfcourse.mouseMoveHandler.bind(golfcourse);
+        const mouseClickHandler = golfcourse.mouseClickHandler.bind(golfcourse);
 
-        document.addEventListener('keydown', keyDownHandler);
-        document.addEventListener('keyup', keyUpHandler);
+        // document.addEventListener('mousemove', event => {
+        //     mouse.x = event.clientX
+        //     mouse.y = event.clientY
+        // });
+        // document.addEventListener('click', (event) => {
+        //     console.log('clicked');
+        // });
+        document.addEventListener('click', mouseClickHandler);
+        document.addEventListener('mousemove', mouseMoveHandler);
     }
 }
 

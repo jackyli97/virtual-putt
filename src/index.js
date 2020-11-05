@@ -14,10 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = 900;
 
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = "rgb(126, 200, 80)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgb(0, 0, 0)";
-    ctx.fillRect(20, 20, 20, 20)
+    // ctx.fillStyle = "rgb(126, 200, 80)";
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+    let img = new Image();
+    img.src = "assets/images/grass.png"
+    ctx.drawImage(img, canvas.width / 2, canvas.height / 2)
+    // ctx.fillStyle = "rgb(0, 0, 0)";
+    // ctx.fillRect(20, 20, 20, 20)
     const gameView = new GameView(ctx);
 })
 
