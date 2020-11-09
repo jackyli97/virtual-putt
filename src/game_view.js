@@ -10,7 +10,6 @@ class GameView {
         this.menuTitle = document.querySelector('.menu-title');
         this.menuText = document.querySelector('.menu-text');
         this.inProgress = false;
-
         this.bindMenuHandlers();
     }
 
@@ -34,12 +33,12 @@ class GameView {
     }
 
     holeOver() {
-        if (1 + 1 === 3) {
+        if (this.game.won()) {
+            console.log("won")
             window.cancelAnimationFrame(this.animationRequestId);
             this.hole += 1;
-
-            this.menuTitle.innerHTML = levels[this.hole].menuTitle;
-            this.menuText.innerHTML = levels[this.hole].menuText;
+            // this.menuTitle.innerHTML = levels[this.hole].menuTitle;
+            // this.menuText.innerHTML = levels[this.hole].menuText;
 
             if (this.hole < 5) {
                 this.startButton.innerHTML = 'Start';
@@ -49,16 +48,7 @@ class GameView {
             }
 
             return true;
-        } else if (1 + 1 === 4) {
-            window.cancelAnimationFrame(this.animationRequestId);
-            this.menuTitle.innerHTML = 'Not Quite!';
-            this.menuText.innerHTML = 'Better luck next time! Give it another shot and hone those herding skills.'
-            this.startButton.innerHTML = 'Play Again';
-
-            this.hole = 1;
-            return true;
-        }
-
+        } 
         return false;
     }
 
