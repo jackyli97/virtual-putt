@@ -41,7 +41,6 @@ class Game {
             this.golfcourse.ballisMoving = true;
             this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
             this.moveBall();
-            console.log('itworked');
         }
     }
     

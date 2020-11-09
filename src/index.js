@@ -1,4 +1,3 @@
-console.log('IT WORKS')
 // import PuttPutt from './game';
 
 // const canvas = document.getElementById('golf-course');

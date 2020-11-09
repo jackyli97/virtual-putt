@@ -34,7 +34,7 @@ class GameView {
 
     holeOver() {
         if (this.game.won()) {
-            console.log("won")
+            // console.log("won")
             window.cancelAnimationFrame(this.animationRequestId);
             // if (levels[this.hole]) {
                 // this.menuTitle.innerHTML = levels[this.hole].menuTitle;

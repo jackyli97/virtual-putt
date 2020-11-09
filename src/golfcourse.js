@@ -256,7 +256,6 @@ class GolfCourse {
             this.clicked = true;
             this.gameCanvas.classList.toggle('place-ball');
             this.gameCanvas.classList.toggle('ball-placed');
-            console.log('clicked');
         }
     }
 
