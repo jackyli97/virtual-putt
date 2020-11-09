@@ -39,6 +39,8 @@ This game will consist of a single screen with multiple screens for each hole/ro
 
 ![wireframe](https://github.com/jackyli97/virtual-putt/blob/main/assets/images/Homepage.png?raw=true)
 
+![wireframe](https://github.com/jackyli97/virtual-putt/blob/main/assets/images/Modal.png?raw=true)
+
 # Architecture & Technologies
 
 * JavaScript for game logic
