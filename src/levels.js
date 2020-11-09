@@ -22,7 +22,8 @@ const levels = {
             (x, y) => ((y >= 200 && y <= 400) && (x >= 320 && x <= 400))],
         holePos: [230,145],
         range: { xmin: 260, ymin: 440, xmax: 340, ymax: 480 },
-        menuTitle: 'Great Job!'
+        menuTitle: '',
+        menuText: "Thanks for Playing!",
     }
 };
 

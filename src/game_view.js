@@ -36,11 +36,13 @@ class GameView {
         if (this.game.won()) {
             console.log("won")
             window.cancelAnimationFrame(this.animationRequestId);
+            // if (levels[this.hole]) {
+                // this.menuTitle.innerHTML = levels[this.hole].menuTitle;
+                this.menuText.innerHTML = levels[this.hole].menuText;
+            // }
             this.hole += 1;
-            // this.menuTitle.innerHTML = levels[this.hole].menuTitle;
-            // this.menuText.innerHTML = levels[this.hole].menuText;
 
-            if (this.hole < 5) {
+            if (this.hole < 1) {
                 this.startButton.innerHTML = 'Start';
             } else {
                 this.startButton.innerHTML = 'Play Again';
